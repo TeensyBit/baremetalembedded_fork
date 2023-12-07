@@ -244,21 +244,6 @@ void Default_Handler(void)
     while(1);
 }
 
-/* Copy .data section to SRAM
-      Flash               SRAM(Data Memory)
---------------------      ---------------------
-unused code memory        unused SRAM
---------------------*     ---------------------  
-.data                *     heap
---------------------* *   ---------------------  
-.rodata              * *  .bss
---------------------  * **---------------------    
-.text                  *  .data      
---------------------    **---------------------    
-vector table
---------------------
-*/
-
 void Reset_Handler(void)
 {
     /* Copy .data section to SRAM

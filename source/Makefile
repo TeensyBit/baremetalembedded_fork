@@ -1,0 +1,26 @@
+CC = arm-none-eabi-gcc
+OPT = -O0
+IS  = -mthumb
+WARN = -Wall
+MACH = cortex-m4
+STD = gnu11
+
+CFILES=main.c led.c stm32_startup.c
+OBJECTS=main.o led.o stm32_startup.o
+BINARY = bin
+
+CFLAGS = -c	-mcpu=$(MACH) $(IS) -std=$(STD) $(OPT) $(DEPFLAGS) $(WARN)
+
+all: main.o led.o stm32_startup.o
+
+main.o:main.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+
+led.o:led.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+	
+stm32_startup.o:stm32_startup.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+
+clean: 
+	rm -rf  *.o *.elf

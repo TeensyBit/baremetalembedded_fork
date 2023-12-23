@@ -3,7 +3,6 @@
 #include "led.h"
 
 
-
 void delay(uint32_t count)
 {
   for(uint32_t i = 0 ; i < count ; i++);

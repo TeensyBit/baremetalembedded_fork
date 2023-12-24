@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * led.h
  *
@@ -25,3 +26,4 @@ void led_off(uint8_t led_no);
 void delay(uint32_t count);
 
 #endif /* LED_H_ */
+

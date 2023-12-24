@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 #include<stdint.h>
 #include "led.h"
@@ -53,5 +54,4 @@ void led_off(uint8_t led_no)
 	  *pGpiodDataReg &= ~( 1 << led_no);
 
 }
-
 

@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 #include<stdint.h>
 #include "led.h"
 

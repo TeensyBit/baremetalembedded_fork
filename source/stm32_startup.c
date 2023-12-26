@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "stdint.h"
 
 /*

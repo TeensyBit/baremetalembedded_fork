@@ -24,13 +24,13 @@ ENTRY(Reset_Handler)
 
 MEMORY
 {
-    FLASH(rx) : ORIGIN = 0x08000000, LENGTH = 1024K  //0x08000000 - 0x080FFFFF
-    SRAM(rwx) : ORIGIN = 0x08000000, LENGTH = 128K  //0x20000000 - 0x2001FFFF
+    FLASH(rx):ORIGIN =0x08000000,LENGTH =1024K 
+    SRAM(rwx):ORIGIN =0x08000000,LENGTH =128K
 }
 
 SECTIONS
 {
-    .text
+    .text :
     {
         *(.isr_vector)
         *(.text)
@@ -38,14 +38,14 @@ SECTIONS
         _etext = .;
     }> FLASH
 
-    .data
+    .data :
     {
-        _sdata = .;     //Location counter's address resets to the start of the VMA - SRAM
+        _sdata = .;   
         *(.data)
         _edata = .;
     }> SRAM AT> FLASH       
 
-    .bss
+    .bss :
     {
         _sbss = .;
         *(.bss)

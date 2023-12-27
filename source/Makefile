@@ -9,9 +9,10 @@ CFILES=main.c led.c stm32_startup.c
 OBJECTS=main.o led.o stm32_startup.o
 BINARY = bin
 
-CFLAGS = -c	-mcpu=$(MACH) $(IS) -std=$(STD) $(OPT) $(DEPFLAGS) $(WARN)
+CFLAGS = -c -mcpu=$(MACH) $(IS) -std=$(STD) $(OPT) $(DEPFLAGS) $(WARN)
+LFLAGS = -nostdlib -T stm32_ls.ld -Wl,-Map=final.map
 
-all: main.o led.o stm32_startup.o
+all: main.o led.o stm32_startup.o final.elf
 
 main.o:main.c
 	$(CC) $(CFLAGS) -c $^ -o $@
@@ -21,6 +22,9 @@ led.o:led.c
 	
 stm32_startup.o:stm32_startup.c
 	$(CC) $(CFLAGS) -c $^ -o $@
+
+final.elf:$(OBJECTS)
+	$(CC) $(LFLAGS) -o $@ $^
 
 clean: 
 	rm -rf  *.o *.elf

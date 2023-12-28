@@ -28,3 +28,6 @@ final.elf:$(OBJECTS)
 
 clean: 
 	rm -rf  *.o *.elf
+
+load:
+	openocd -f interface/stlink-v2.cfg -f target/stm32f4x.cfg

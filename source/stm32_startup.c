@@ -25,6 +25,14 @@ Vector Table
 
 #define STACK_START SRAM_END
 
+extern uint32_t _ebss;
+extern uint32_t _sbss;
+extern uint32_t _etext;
+extern uint32_t _sdata;
+extern uint32_t _edata;
+
+int main(void);
+
 /*  Vector Table
 ----------------------- 0x08000184
 IRQs till 81
@@ -260,6 +268,20 @@ void Reset_Handler(void)
     vector table
     --------------------
     */
+    uint8_t *p_sdata = (uint8_t*)&_sdata;
+    uint8_t *p_etext = (uint8_t*)&_edata;
+
+    uint32_t size = &_sdata-&_edata;    //Size in bytes
+    
+    for(uint32_t i = 0;i<size;i++)       
+        *p_sdata++ = *p_etext++;
+
     //initialise the .bss section to zero in SRAMs
+    uint8_t *p_sbss = (uint8_t*)&_sbss;
+    size = &_ebss-&_sbss;
+
+    for(uint32_t i = 0;i<size;i++)       
+        *p_sbss++ = 0;
+
     //call main
 }

@@ -1,0 +1,3 @@
+//ignore all object and elf files
+*.elf
+*.o

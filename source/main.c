@@ -55,7 +55,7 @@ int main(void)
 
 	enable_processor_faults();
 	
-	//initialise_monitor_handles();
+	initialise_monitor_handles();
 
 	init_scheduler_stack(SCHED_STACK_START);
 

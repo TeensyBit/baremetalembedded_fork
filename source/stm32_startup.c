@@ -19,8 +19,8 @@ Vector Table
 ------------------- 0x08000000
 */
 
-#define SRAM_START  0x20000000
-#define SRAM_SIZE   (128*1024)              //128 KB
+#define SRAM_START  0x20000000U
+#define SRAM_SIZE   (128U*1024U)              //128 KB
 #define SRAM_END    (SRAM_START+SRAM_SIZE)
 
 #define STACK_START SRAM_END
@@ -145,7 +145,7 @@ void CRYP_IRQHandler(void)                  __attribute__ ((weak, alias("Default
 void HASH_RNG_IRQHandler(void)              __attribute__ ((weak, alias("Default_Handler")));
 void FPU_IRQHandler(void)                   __attribute__ ((weak, alias("Default_Handler"))); 
 
-uint32_t vectors[] __attribute__((section("isr_vectors"))) = 
+uint32_t vectors[] __attribute__((section(".isr_vectors"))) = 
 {
     STACK_START,
     (uint32_t)Reset_Handler,
@@ -269,19 +269,20 @@ void Reset_Handler(void)
     --------------------
     */
     uint8_t *p_sdata = (uint8_t*)&_sdata;
-    uint8_t *p_etext = (uint8_t*)&_edata;
+    uint8_t *p_etext = (uint8_t*)&_etext;
 
-    uint32_t size = &_sdata-&_edata;    //Size in bytes
+    uint32_t size = (uint32_t)&_edata-(uint32_t)&_sdata;    //Size in bytes
     
     for(uint32_t i = 0;i<size;i++)       
         *p_sdata++ = *p_etext++;
 
     //initialise the .bss section to zero in SRAMs
     uint8_t *p_sbss = (uint8_t*)&_sbss;
-    size = &_ebss-&_sbss;
+    size = (uint32_t)&_ebss-(uint32_t)&_sbss;
 
     for(uint32_t i = 0;i<size;i++)       
         *p_sbss++ = 0;
 
     //call main
+    main();
 }

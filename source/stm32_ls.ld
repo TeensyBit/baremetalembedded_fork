@@ -32,7 +32,7 @@ SECTIONS
 {
     .text :
     {
-        *(.isr_vector)
+        *(.isr_vectors)
         *(.text)
         *(.rodata)
         . = ALIGN(4);

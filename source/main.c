@@ -15,11 +15,11 @@
 #include"main.h"
 #include "led.h"
 
+
 void task1_handler(void); //This is task1
 void task2_handler(void); //this is task2
 void task3_handler(void); //this is task3
 void task4_handler(void); // this is task4 of the application
-
 
 void init_systick_timer(uint32_t tick_hz);
 __attribute__((naked)) void init_scheduler_stack(uint32_t sched_top_of_stack);
@@ -30,15 +30,13 @@ uint32_t get_psp_value(void);
 
 void task_delay(uint32_t tick_count);
 
-
 uint8_t current_task = 1; //task1 is running
-
-
 uint32_t g_tick_count = 0;
 
 const uint32_t const_v_1 = 100;
 const uint32_t const_v_2 = 100;
 const uint8_t const_V_3 = 100;
+
 typedef struct
 {
 	uint32_t psp_value;
@@ -133,8 +131,6 @@ void task4_handler(void)
 		led_off(LED_RED);
 		task_delay(125);
 	}
-
-
 }
 
 
@@ -157,7 +153,6 @@ void init_systick_timer(uint32_t tick_hz)
 
     //enable the systick
     *pSCSR |= ( 1 << 0); //enables the counter
-
 }
 
 
@@ -167,10 +162,6 @@ __attribute__((naked)) void init_scheduler_stack(uint32_t sched_top_of_stack)
      __asm volatile("BX LR");
 
 }
-
-
-
-
 
 void init_tasks_stack(void)
 {

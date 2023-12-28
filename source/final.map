@@ -3,7 +3,7 @@ Memory Configuration
 
 Name             Origin             Length             Attributes
 FLASH            0x08000000         0x00100000         xr
-SRAM             0x08000000         0x00020000         xrw
+SRAM             0x20000000         0x00020000         xrw
 *default*        0x00000000         0xffffffff
 
 Linker script and memory map
@@ -161,34 +161,34 @@ LOAD stm32_startup.o
 .rel.dyn        0x080005e8        0x0
  .rel.iplt      0x080005e8        0x0 main.o
 
-.data           0x08000000        0x4 load address 0x080005e8
-                0x08000000                _sdata = .
+.data           0x20000000        0x4 load address 0x080005e8
+                0x20000000                _sdata = .
  *(.data)
- .data          0x08000000        0x1 main.o
-                0x08000000                current_task
- .data          0x08000001        0x0 led.o
- .data          0x08000001        0x0 stm32_startup.o
-                0x08000004                . = ALIGN (0x4)
- *fill*         0x08000001        0x3 
-                0x08000004                _edata = .
+ .data          0x20000000        0x1 main.o
+                0x20000000                current_task
+ .data          0x20000001        0x0 led.o
+ .data          0x20000001        0x0 stm32_startup.o
+                0x20000004                . = ALIGN (0x4)
+ *fill*         0x20000001        0x3 
+                0x20000004                _edata = .
 
-.igot.plt       0x08000004        0x0 load address 0x080005ec
- .igot.plt      0x08000004        0x0 main.o
+.igot.plt       0x20000004        0x0 load address 0x080005ec
+ .igot.plt      0x20000004        0x0 main.o
 
-isr_vectors     0x08000004      0x188 load address 0x080005ec
- isr_vectors    0x08000004      0x188 stm32_startup.o
-                0x08000004                vectors
+isr_vectors     0x20000004      0x188 load address 0x080005ec
+ isr_vectors    0x20000004      0x188 stm32_startup.o
+                0x20000004                vectors
 
-.bss            0x0800018c       0x54 load address 0x08000774
-                0x0800018c                _sbss = .
+.bss            0x2000018c       0x54 load address 0x08000774
+                0x2000018c                _sbss = .
  *(.bss)
- .bss           0x0800018c       0x54 main.o
-                0x0800018c                g_tick_count
-                0x08000190                user_tasks
- .bss           0x080001e0        0x0 led.o
- .bss           0x080001e0        0x0 stm32_startup.o
-                0x080001e0                . = ALIGN (0x4)
-                0x080001e0                _ebss = .
+ .bss           0x2000018c       0x54 main.o
+                0x2000018c                g_tick_count
+                0x20000190                user_tasks
+ .bss           0x200001e0        0x0 led.o
+ .bss           0x200001e0        0x0 stm32_startup.o
+                0x200001e0                . = ALIGN (0x4)
+                0x200001e0                _ebss = .
 OUTPUT(final.elf elf32-littlearm)
 LOAD linker stubs
 

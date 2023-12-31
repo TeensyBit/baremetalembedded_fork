@@ -6,7 +6,7 @@ MACH = cortex-m4
 STD = gnu11
 
 CFILES=main.c led.c syscalls.c stm32_startup.c
-OBJECTS=main.o led.o stm32_startup.o
+OBJECTS=stm32_startup.o main.o led.o
 BINARY = bin
 
 CFLAGS = -c -mcpu=$(MACH) $(IS) -std=$(STD) $(OPT) $(DEPFLAGS) $(WARN)

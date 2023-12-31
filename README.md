@@ -4,3 +4,4 @@ Understanding build procedure and linker script for bare metal embedded systems(
 
 # baremetalembedded_fork
 
+Copy the .gdbinit file to C:\Users\<YourUsername>\

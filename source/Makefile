@@ -4,13 +4,14 @@ IS  = -mthumb
 WARN = -Wall
 MACH = cortex-m4
 STD = gnu11
+FPU = soft
 
 CFILES=main.c led.c syscalls.c stm32_startup.c
 OBJECTS=stm32_startup.o main.o led.o syscalls.o
 BINARY = bin
 
-CFLAGS = -c -mcpu=$(MACH) $(IS) -std=$(STD) $(OPT) $(DEPFLAGS) $(WARN)
-LFLAGS = --specs=nano.specs -T stm32_ls.ld -Wl,-Map=final.map
+CFLAGS = -c -mcpu=$(MACH) $(IS) -mfloat-abi=$(FPU) -std=$(STD) $(OPT) $(DEPFLAGS) $(WARN)
+LFLAGS = -mcpu=$(MACH) $(IS) -mfloat-abi=$(FPU) --specs=nano.specs -T stm32_ls.ld -Wl,-Map=final.map
 
 all: main.o led.o stm32_startup.o syscalls.o final.elf
 

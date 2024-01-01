@@ -8,12 +8,15 @@ FPU = soft
 
 CFILES=main.c led.c syscalls.c stm32_startup.c
 OBJECTS=stm32_startup.o main.o led.o syscalls.o
+OBJECTS_SEMI=stm32_startup.o main.o led.o 
 BINARY = bin
 
 CFLAGS = -c -mcpu=$(MACH) $(IS) -mfloat-abi=$(FPU) -std=$(STD) $(OPT) $(DEPFLAGS) $(WARN)
 LFLAGS = -mcpu=$(MACH) $(IS) -mfloat-abi=$(FPU) --specs=nano.specs -T stm32_ls.ld -Wl,-Map=final.map
+LFLAGS_SH = -mcpu=$(MACH) $(IS) -mfloat-abi=$(FPU) --specs=rdimon.specs -T stm32_ls.ld -Wl,-Map=final.map
 
 all: main.o led.o stm32_startup.o syscalls.o final.elf
+semi: main.o led.o stm32_startup.o final_sh.elf	#semihosting library provides the syscalls
 
 main.o:main.c
 	$(CC) $(CFLAGS) -c $^ -o $@
@@ -29,6 +32,9 @@ syscalls.o: syscalls.c
 
 final.elf:$(OBJECTS)
 	$(CC) $(LFLAGS) -o $@ $^
+
+final_sh.elf:$(OBJECTS_SEMI)
+	$(CC) $(LFLAGS_SH) -o $@ $^
 
 clean: 
 	rm -rf  *.o *.elf

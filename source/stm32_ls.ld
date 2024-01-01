@@ -50,8 +50,12 @@ SECTIONS
     .bss :
     {
         _sbss = .;
+        __bss_start__ = _sbss;
         *(.bss)
         . = ALIGN(4);
         _ebss = .;
+        __bss_end__ = _ebss;
+        . = ALIGN(4);
+        end = .;
     }> SRAM
 }

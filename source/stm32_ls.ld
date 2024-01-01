@@ -37,9 +37,13 @@ SECTIONS
         *(.text.*)
         *(.rodata)
         *(.rodata.*)
+        *(.init)
+        *(.fini)
         . = ALIGN(4);
         _etext = .;
     }> FLASH
+
+    la_data = LOADADDR(.data);
 
     .data :
     {

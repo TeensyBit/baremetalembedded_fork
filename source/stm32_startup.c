@@ -51,6 +51,7 @@ Total Memory consumed = 82 IRQs + 15 System Exceptions + 1 MSP = 98 word address
 */
 
 void Default_Handler(void);
+void __libc_init_array(void);
 
 void Reset_Handler(void);
 void NMI_Handler(void)                      __attribute__ ((weak, alias("Default_Handler")));
@@ -282,6 +283,9 @@ void Reset_Handler(void)
 
     for(uint32_t i = 0;i<size;i++)       
         *p_sbss++ = 0;
+
+    //initialise C std library
+    __libc_init_array();
 
     //call main
     main();

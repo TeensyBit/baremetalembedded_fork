@@ -78,7 +78,7 @@ END GROUP
 LOAD c:/program files (x86)/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
 LOAD c:/program files (x86)/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
 
-.text           0x08000000     0x18d4
+.text           0x08000000     0x18ec
  *(.isr_vectors)
  .isr_vectors   0x08000000      0x188 stm32_startup.o
                 0x08000000                vectors
@@ -436,30 +436,29 @@ LOAD c:/program files (x86)/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc
  .rodata.__sf_fake_stdout
                 0x080018b4       0x20 c:/program files (x86)/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp\libc_nano.a(lib_a-findfp.o)
                 0x080018b4                __sf_fake_stdout
-                0x080018d4                . = ALIGN (0x4)
-                0x080018d4                _etext = .
-
-.glue_7         0x080018d4        0x0
- .glue_7        0x080018d4        0x0 linker stubs
-
-.glue_7t        0x080018d4        0x0
- .glue_7t       0x080018d4        0x0 linker stubs
-
-.vfp11_veneer   0x080018d4        0x0
- .vfp11_veneer  0x080018d4        0x0 linker stubs
-
-.v4_bx          0x080018d4        0x0
- .v4_bx         0x080018d4        0x0 linker stubs
-
-.init           0x080018d4        0xc
+ *(.init)
  .init          0x080018d4        0x4 c:/program files (x86)/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
                 0x080018d4                _init
  .init          0x080018d8        0x8 c:/program files (x86)/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
-
-.fini           0x080018e0        0xc
+ *(.fini)
  .fini          0x080018e0        0x4 c:/program files (x86)/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
                 0x080018e0                _fini
  .fini          0x080018e4        0x8 c:/program files (x86)/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+                0x080018ec                . = ALIGN (0x4)
+                0x080018ec                _etext = .
+                0x080018f8                la_data = LOADADDR (.data)
+
+.glue_7         0x080018ec        0x0
+ .glue_7        0x080018ec        0x0 linker stubs
+
+.glue_7t        0x080018ec        0x0
+ .glue_7t       0x080018ec        0x0 linker stubs
+
+.vfp11_veneer   0x080018ec        0x0
+ .vfp11_veneer  0x080018ec        0x0 linker stubs
+
+.v4_bx          0x080018ec        0x0
+ .v4_bx         0x080018ec        0x0 linker stubs
 
 .iplt           0x080018ec        0x0
  .iplt          0x080018ec        0x0 c:/program files (x86)/gnu arm embedded toolchain/10 2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o

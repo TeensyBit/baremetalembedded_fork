@@ -28,6 +28,7 @@ Vector Table
 extern uint32_t _ebss;
 extern uint32_t _sbss;
 extern uint32_t _etext;
+extern uint32_t la_data;
 extern uint32_t _sdata;
 extern uint32_t _edata;
 
@@ -270,7 +271,7 @@ void Reset_Handler(void)
     --------------------
     */
     uint8_t *p_sdata = (uint8_t*)&_sdata;
-    uint8_t *p_etext = (uint8_t*)&_etext;
+    uint8_t *p_etext = (uint8_t*)&la_data;
 
     uint32_t size = (uint32_t)&_edata-(uint32_t)&_sdata;    //Size in bytes
     
